@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script>
+        window.onload = pageLoad;
+        const INSPIRATION_QUOTES = [
+            {
+                quote: 'Nice try but no cigar',
+                author: 'Mr. Johnson'
+            },
+            {
+                quote: 'Don\'t criticize what you don\'t understand, son. You never walked in that man\'s shoes.',
+                author: 'Elvis Presley'
+            },
+            {
+                quote: 'You have to fight to reach your dream. You have to sacrifice and work hard for it.',
+                author: 'Lionel Messi'
+            },
+            {
+                quote: 'There is only one way to avoid criticism: do nothing, say nothing, and be nothing.',
+                author: 'Aristotle'
+            },
+            {
+                quote: 'Nations are born in the hearts of poets, they prosper and die in the hands of politicians.',
+                author: 'Muhammad Iqbal'
+            }
+        ]
+        function pageLoad() {
+            createQuote();
+        }
+
+        function createQuote() {
+
+            var randomIndex = Math.floor(Math.random()*INSPIRATION_QUOTES.length);
+            var quoteData = INSPIRATION_QUOTES[randomIndex];
+
+            //replace method used to replace characters within the url string.
+            //Encoding url to create an appealing post.
+
+            var quote = quoteData.quote.replace("%20", " ");
+            quote = quoteData.quote.replace("'", "%E2%80%99");
+            var author = quoteData.author.replace("%20", " ");
+
+            var url = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=I+found+this+deep+quote%0D%0A%0D%0A%22"
+
+            //Quote
+            url += quote;
+            url += "%22+"; 
+            //Author
+            url += author;
+            url += "%0D%0A%0D%0AThis+hit+me+really+hard."
+
+            document.getElementById('tweet-quote').href = url;
+            document.getElementById('text').innerText = quoteData.quote;
+            document.getElementById('author').innerText = quoteData.author;
+        }
+    </script>
+    <style>
+        * {
+            margin: 10px 10px 10px 10px;
+        }
+        .fa-solid.fa-quote-left{
+            transform: scale(2);
+        }
+        
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <script src="https://kit.fontawesome.com/a9b91a96fd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-md-8 offset-md-2">
+                <wrapper id="quote-box">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            Inspiring Quote Generator
+                        </div>
+                        <div class="card-body">
+                        <blockquote class="blockquote mb-0 text-right">
+                            <p><i class="fa-solid fa-quote-left"></i><span id="text"></span></p>
+                            <footer class="blockquote-footer"><span id="author"></span></footer>
+                        </blockquote>
+                        <button class="btn btn-danger w-10 my-1" id="new-quote" onClick="createQuote()"><i class="fa-solid fa-comment"></i></button>
+                        <a class="btn btn-primary w-10 my-1" id="tweet-quote" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </wrapper>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
